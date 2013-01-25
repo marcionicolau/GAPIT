@@ -97,8 +97,6 @@ emma.eigen.R.w.Z <- function(Z, K, X, complete = TRUE) {
   n <- nrow(Z)
   t <- ncol(Z)
   q <- ncol(X)
- 
-
   
   SZ <- Z - X%*%solve(crossprod(X,X))%*%crossprod(X,Z)
   eig <- eigen(K%*%crossprod(Z,SZ),symmetric=FALSE,EISPACK=TRUE)
@@ -181,8 +179,8 @@ emma.MLE <- function(y, X, K, Z=NULL, ngrids=100, llim=-10, ulim=10,
   q <- ncol(X)
   
 #  stopifnot(nrow(K) == t)
-  stopifnot(ncol(K) == t)
-  stopifnot(nrow(X) == n)
+  stopifnot(ncol(K) == t || nrow(X) == n)
+#   stopifnot(nrow(X) == n)
 
   if ( det(crossprod(X,X)) == 0 ) {
     warning("X is singular")
@@ -295,8 +293,8 @@ emma.REMLE <- function(y, X, K, Z=NULL, ngrids=100, llim=-10, ulim=10,
   q <- ncol(X)
 
 #  stopifnot(nrow(K) == t)
-  stopifnot(ncol(K) == t)
-  stopifnot(nrow(X) == n)
+  stopifnot(ncol(K) == t || nrow(X) == n)
+#   stopifnot(nrow(X) == n)
 
   if ( det(crossprod(X,X)) == 0 ) {
     warning("X is singular")
@@ -419,9 +417,9 @@ emma.ML.LRT <- function(ys, xs, K, Z=NULL, X0 = NULL, ngrids=100, llim=-10, ulim
   ps <- matrix(nrow=m,ncol=g)
   ML0 <- vector(length=g)
   
-  stopifnot(nrow(K) == t)
-  stopifnot(ncol(K) == t)
-  stopifnot(nrow(X0) == n)
+  stopifnot(nrow(K) == t || ncol(K) == t || nrow(X0) == n)
+#   stopifnot(ncol(K) == t)
+#   stopifnot(nrow(X0) == n)
 
   if ( sum(is.na(ys)) == 0 ) {
     eig.L <- emma.eigen.L(Z,K)
@@ -657,9 +655,9 @@ emma.REML.t <- function(ys, xs, K, Z=NULL, X0 = NULL, ngrids=100, llim=-10, ulim
   q0 <- ncol(X0)
   q1 <- q0 + 1
   
-  stopifnot(nrow(K) == t)
-  stopifnot(ncol(K) == t)
-  stopifnot(nrow(X0) == n)
+  stopifnot(nrow(K) == t || ncol(K) == t || nrow(X0) == n)
+#   stopifnot(ncol(K) == t)
+#   stopifnot(nrow(X0) == n)
 
   if ( !ponly ) {
     REMLs <- matrix(nrow=m,ncol=g)
