@@ -1,0 +1,16 @@
+Package: GAPIT
+Type: Package
+Title: What the package does (short line)
+Version: 1.0
+Date: 2013-02-26
+Author: Who wrote it
+Maintainer: Who to complain to <yourfault@somewhere.net>
+Description: More about what it does (maybe more than one line)
+License: What license is it under?
+Collate:
+    'emma.R'
+    'gapit_functions.R'
+    'gapit_kinships.R'
+    'gapit_output_data.R'
+    'gapit_quality.R'
+    'gapit_support.R'
